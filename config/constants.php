@@ -7,3 +7,10 @@ ULTRA VIOLET - # 5F5980
 PLATINIUM - #DFDFDF
 
 -->
+
+<?php
+
+DEFINE('DSN', 'mysql:host=localhost;dbname=rentmyride');
+DEFINE('USER', 'rentmyride_admin');
+DEFINE('PWD', '*osxDiN74L(.Pb-!');
+define('REGEX_TYPE', "/^[0-9a-zA-Zàâçéèêëîïôûùüÿñæœ .-]*$/");
