@@ -58,4 +58,18 @@ class Type
         $result = $sth->execute();
         return $result;
     }
+
+    /**
+     * Méthode retournant un tableau d'objet des catégories
+     * @return array
+     */
+    public static function get_all(): array
+    {
+        $pdo = connect();
+        $sql = "SELECT * FROM `types`;";
+        $sth = $pdo->query($sql);
+        $datas = $sth->fetchAll();
+
+        return $datas;
+    }
 }

@@ -29,7 +29,11 @@ try {
         }
     };
 } catch (\Throwable $th) {
-    //throw $th;
+    include __DIR__ . '/../../../views/dashboard/templates/header-dashboard.php';
+    include __DIR__ . '/../../../views/dashboard/templates/navbar-dashboard.php';
+    include __DIR__ . '/../../../views/pages/error.php';
+    include __DIR__ . '/../../../views/dashboard/templates/footer-dashboard.php';
+    die;
 }
 
 

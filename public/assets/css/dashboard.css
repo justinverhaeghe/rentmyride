@@ -21,6 +21,10 @@ li {
     font-size: 30px;
 }
 
+.bg-grey {
+    background-color: #343434 !important;
+}
+
 @media screen and (max-width: 575px) {
     #sidebar {
         min-height: 30vh;
