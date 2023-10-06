@@ -1,0 +1,32 @@
+body {
+    font-family: "Space Grotesk", sans-serif;
+}
+
+#sidebar {
+    background-color: #343434;
+    color: #dfdfdf;
+    min-height: 100vh;
+}
+
+#sidebar a,
+ul,
+li {
+    text-decoration: none;
+    list-style: none;
+    color: #dfdfdf;
+    padding-left: 0;
+}
+
+#sidebar a:hover {
+    color: #a8a8a5;
+}
+
+.icons {
+    font-size: 30px;
+}
+
+@media screen and (max-width: 575px) {
+    #sidebar {
+        min-height: 30vh;
+    }
+}
