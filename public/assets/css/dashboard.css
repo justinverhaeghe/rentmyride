@@ -2,6 +2,7 @@
     background-color: #343434;
     color: #dfdfdf;
     min-height: 100vh;
+    box-shadow: 5px 0 5px -5px #333;
 }
 
 #sidebar a,
@@ -23,6 +24,30 @@ li {
 
 .bg-grey {
     background-color: #343434 !important;
+}
+
+.link-position {
+    float: right;
+}
+
+.link-position a {
+    text-decoration: none;
+    color: white;
+}
+
+.bi-pencil-square {
+    color: #343434;
+}
+.bi-pencil-square:hover {
+    color: #a8a8a5;
+}
+
+.bi-file-earmark-x {
+    color: #343434;
+}
+
+.bi-file-earmark-x:hover {
+    color: #a8a8a5;
 }
 
 @media screen and (max-width: 575px) {
