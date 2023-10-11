@@ -10,6 +10,7 @@ try {
     $style = 'dashboard';
     $page = 'Liste des catégories de véhicules';
     $types = Type::get_all();
+    $delete = filter_input(INPUT_GET, 'delete', FILTER_SANITIZE_NUMBER_INT);
 } catch (\Throwable $th) {
     $error = $th->getMessage();
     include __DIR__ . '/../../../views/dashboard/templates/header-dashboard.php';

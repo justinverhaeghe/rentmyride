@@ -20,6 +20,10 @@ try {
         } else {
             if (preg_match(REGEX_TYPE, $type) == false) {
                 $errors['type'] = 'Veuillez entrer un nom de catégorie valide';
+            } else {
+                if (Type::exists($type)) {
+                    $errors['type'] =  'Le type existe déjà dans la base de données.';
+                }
             }
         }
         if (empty($errors)) {
@@ -29,6 +33,7 @@ try {
         }
     };
 } catch (\Throwable $th) {
+    $errors = $th->getMessage();
     include __DIR__ . '/../../../views/dashboard/templates/header-dashboard.php';
     include __DIR__ . '/../../../views/dashboard/templates/navbar-dashboard.php';
     include __DIR__ . '/../../../views/pages/error.php';

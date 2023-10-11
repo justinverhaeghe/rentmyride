@@ -73,6 +73,25 @@ class Type
         return $datas;
     }
 
+    /**
+     * Méthode permettant d'afficher les 10 premiers résulats du type
+     * @return array
+     */
+    public static function get_first10(): array
+    {
+        $pdo = connect();
+        $sql = "SELECT * FROM `types` LIMIT 10;";
+        $sth = $pdo->query($sql);
+        $datas = $sth->fetchAll();
+
+        return $datas;
+    }
+
+    /**
+     * méthode permettant d'obtenir l'ID du type
+     * 
+     * @return object
+     */
     public static function get(int $id_types): object
     {
         $pdo = connect();
@@ -85,6 +104,10 @@ class Type
         return $result;
     }
 
+    /**
+     * Méthode permettant de mettre à jour les entrées de la base de données.
+     * @return bool
+     */
     public function update(): bool
     {
         $pdo = connect();
@@ -96,14 +119,35 @@ class Type
         return $result;
     }
 
+    /**
+     * Méthode permettant de supprimer une donnée.
+     * 
+     * @return bool
+     */
     public static function delete(int $id_types): bool
     {
         $pdo = connect();
         $sql = "DELETE FROM `types` WHERE `id_types` = :id_types;";
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_types', $id_types, PDO::PARAM_INT);
-        $result = $sth->execute();
-        var_dump($result);
-        return $result;
+        $sth->execute();
+        return (bool) $sth->rowCount();
+    }
+
+    /**
+     * Methode permettant de vérifier si un type existe déjà.
+     * 
+     * @return bool
+     */
+    public static function exists(string $type): bool
+    {
+        $pdo = connect();
+        $sql = "SELECT COUNT(*) FROM `types` WHERE `type` = :type;";
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':type', $type, PDO::PARAM_STR);
+        $sth->execute();
+        $result = $sth->fetchColumn();
+
+        return $result > 0;
     }
 }

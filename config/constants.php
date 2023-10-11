@@ -10,7 +10,8 @@ PLATINIUM - #DFDFDF
 
 <?php
 
-DEFINE('DSN', 'mysql:host=localhost;dbname=rentmyride');
-DEFINE('USER', 'rentmyride_admin');
-DEFINE('PWD', '*osxDiN74L(.Pb-!');
+define('DSN', 'mysql:host=localhost;dbname=rentmyride');
+define('USER', 'rentmyride_admin');
+define('PWD', '*osxDiN74L(.Pb-!');
 define('REGEX_TYPE', "/^[0-9a-zA-Zàâçéèêëîïôûùüÿñæœ .-]*$/");
+define('REGEX_MODEL', "[0-9a-zA-Z .-]");

@@ -3,6 +3,8 @@
     color: #dfdfdf;
     min-height: 100vh;
     box-shadow: 5px 0 5px -5px #333;
+    position: sticky;
+    top: 0;
 }
 
 #sidebar a,
@@ -20,6 +22,7 @@ li {
 
 .icons {
     font-size: 30px;
+    height: 35px;
 }
 
 .bg-grey {
@@ -42,11 +45,11 @@ li {
     color: #a8a8a5;
 }
 
-.bi-file-earmark-x {
-    color: #343434;
+.bi-x-circle {
+    color: #343434 !important;
 }
 
-.bi-file-earmark-x:hover {
+.bi-x-circle:hover {
     color: #a8a8a5;
 }
 
