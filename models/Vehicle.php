@@ -7,11 +7,12 @@ class Vehicle
     private string $brand;
     private string $model;
     private string $registration;
-    private int $milleage;
-    private int $picture;
+    private int $mileage;
+    private ?int $picture;
     private DateTime $created_at;
     private DateTime $updated_at;
-    private DateTime $deleted_at;
+    private ?DateTime $deleted_at;
+    private int $id_types;
 
     /**
      * Méthode retournant la valeur de l'ID_vehicles
@@ -46,9 +47,9 @@ class Vehicle
         return $this->model;
     }
 
-    public function set_model(string $brand)
+    public function set_model(string $model)
     {
-        $this->brand = $brand;
+        $this->model = $model;
     }
 
     public function get_registration(): string
@@ -61,22 +62,22 @@ class Vehicle
         $this->registration = $registration;
     }
 
-    public function get_milleage(): string
+    public function get_mileage(): string
     {
-        return $this->milleage;
+        return $this->mileage;
     }
 
-    public function set_milleage(string $milleage)
+    public function set_mileage(string $mileage)
     {
-        $this->milleage = $milleage;
+        $this->mileage = $mileage;
     }
 
-    public function get_picture(): string
+    public function get_picture(): ?string
     {
         return $this->picture;
     }
 
-    public function set_picture(string $picture)
+    public function set_picture(?string $picture)
     {
         $this->picture = $picture;
     }
@@ -101,13 +102,37 @@ class Vehicle
         $this->updated_at = $updated_at;
     }
 
-    public function get_deleted_at(): DateTime
+    public function get_deleted_at(): ?DateTime
     {
         return $this->deleted_at;
     }
 
-    public function set_deleted_at(DateTime $deleted_at)
+    public function set_deleted_at(?DateTime $deleted_at)
     {
         $this->deleted_at = $deleted_at;
+    }
+
+    public function get_id_types(): int
+    {
+        return $this->id_types;
+    }
+
+    public function set_id_types(int $id_types)
+    {
+        $this->id_types = $id_types;
+    }
+
+    public function insert(): bool
+    {
+        $pdo = connect();
+        $sql = 'INSERT INTO `vehicles`(`id_types`, `brand`, `model`, `registration`, `mileage`) VALUES (:id_type, :brand, :model, :registration, :mileage);';
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_type', $this->get_id_types(), PDO::PARAM_INT);
+        $sth->bindValue(':brand', $this->get_brand(), PDO::PARAM_STR);
+        $sth->bindValue(':model', $this->get_model(), PDO::PARAM_STR);
+        $sth->bindValue(':registration', $this->get_registration(), PDO::PARAM_STR);
+        $sth->bindValue(':mileage', $this->get_mileage(), PDO::PARAM_INT);
+        $result = $sth->execute();
+        return $result;
     }
 }

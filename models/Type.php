@@ -92,7 +92,7 @@ class Type
      * 
      * @return object
      */
-    public static function get(int $id_types): object
+    public static function get(int $id_types): ?object
     {
         $pdo = connect();
         $sql = "SELECT * FROM `types` WHERE `id_types` = :id_types;";
