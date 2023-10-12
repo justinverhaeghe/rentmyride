@@ -135,4 +135,29 @@ class Vehicle
         $result = $sth->execute();
         return $result;
     }
+
+    public static function get_all(): array
+    {
+        $pdo = connect();
+        $sql = "SELECT `vehicles`.*, `types`.`type` 
+        FROM `vehicles` 
+        INNER JOIN `types` ON `vehicles`.`Id_types` = `types`.`Id_types`;";
+        $sth = $pdo->query($sql);
+        $datas = $sth->fetchAll();
+
+        return $datas;
+    }
+
+    public static function get_first10(): array
+    {
+        $pdo = connect();
+        $sql = "SELECT `vehicles`.*, `types`.`type` 
+        FROM `vehicles` 
+        INNER JOIN `types` ON `vehicles`.`Id_types` = `types`.`Id_types`
+        LIMIT 10;";
+        $sth = $pdo->query($sql);
+        $datas = $sth->fetchAll();
+
+        return $datas;
+    }
 }

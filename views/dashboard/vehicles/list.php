@@ -1,7 +1,5 @@
 <main>
     <div class="col-12 pt-5 text-center">
-
-        <h2>Liste des véhicules</h2>
         <button class="btn bg-grey text-light mb-3 link-position"><a
                 href="/controllers/dashboard/vehicles/create-ctrl.php">Ajouter</a></button>
         <table class="table rounded table-hover mb-3">
@@ -13,6 +11,8 @@
                     <th class="col text-light bg-grey">Modèle</th>
                     <th class="col text-light bg-grey">Immat.</th>
                     <th class="col text-light bg-grey">Km</th>
+                    <th class="col text-light bg-grey">Modifier</th>
+                    <th class="col text-light bg-grey">Supprimer</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,39 +25,20 @@
                     <td><?= $vehicle->model ?></td>
                     <td><?= $vehicle->registration ?></td>
                     <td><?= $vehicle->mileage ?></td>
+                    <td><a href="/controllers/dashboard/types/update-ctrl.php?id_types=<?= $vehicle->id_vehicles ?>"><i
+                                class="bi bi-pencil-square"></i></a>
+                    </td>
+                    <td><a href="/controllers/dashboard/types/delete-ctrl.php?id_types=<?= $vehicle->id_vehicles ?>"><i
+                                class="bi bi-x-circle"></i></a></td>
+
                 </tr>
                 <?php } ?>
             </tbody>
         </table>
-        <button class="btn bg-grey text-light mb-3 link-position"><a
-                href="/controllers/dashboard/vehicles/list-ctrl.php">Voir plus</a></button>
-    </div>
-
-    <div class="col-12 pt-5 text-center">
-
-        <h2>Liste des catégories</h2>
-        <button class="btn bg-grey text-light mb-3 link-position"><a
-                href="/controllers/dashboard/types/create-ctrl.php">Ajouter</a></button>
-        <table class="table rounded table-hover mb-3">
-            <thead>
-                <tr>
-                    <th class="bg-grey text-light col">#</th>
-                    <th class="col text-light bg-grey">Type de catégorie</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($types as $type) { ?>
-                <tr>
-                    <td><?= $type->id_types ?></td>
-                    <td><?= $type->type ?></td>
-                </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-        <button class="btn bg-grey text-light mb-3 link-position"><a
-                href="/controllers/dashboard/types/list-ctrl.php">Voir plus</a></button>
-
+        <?php if (isset($delete) && $delete === '1') { ?>
+        <p class="text-success">L'enregistrement à bien été supprimé</p>
+        <?php } elseif (isset($delete) && $delete === '0') { ?>
+        <p class="text-danger">L'enregistrement n'a pas été supprimé</p>
+        <?php } ?>
     </div>
 </main>

@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../../config/constants.php';
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/../../models/Type.php';
+require_once __DIR__ . '/../../models/Vehicle.php';
 
 try {
     $errors = [];
@@ -10,6 +11,7 @@ try {
     $style = 'dashboard';
     $page = 'Bienvenue sur le Dashboard';
     $types = Type::get_first10();
+    $vehicles = Vehicle::get_first10();
 } catch (\Throwable $th) {
     $error = $th->getMessage();
     include __DIR__ . '/../../../views/dashboard/templates/header-dashboard.php';

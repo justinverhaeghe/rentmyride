@@ -9,19 +9,21 @@
                 </div>
                 <div class="col-12 ps-5">
                     <ul>
+                        <li class="fs-5">Catégorie</li>
                         <li class="mb-3"><a href="/controllers/dashboard/types/create-ctrl.php"><i class="bi bi-folder-plus icons"></i>
                                 <div class="vr mx-2"></div><span class="menu-text">
                                     Ajouter une catégorie</span>
                             </a></li>
-                        <li class="mb-3"><a href="/controllers/dashboard/types/list-ctrl.php"><i class="bi bi-tag icons"></i>
+                        <li class="mb-5"><a href="/controllers/dashboard/types/list-ctrl.php"><i class="bi bi-tag icons"></i>
                                 <div class="vr mx-2"></div><span class="menu-text">
                                     Liste des catégories</span>
                             </a></li>
-                        <li class="mb-3"><a href="/controllers/dashboard/vehicles/create-ctrl.php"><i class="bi bi-gear icons"></i>
+                        <li class="fs-5">Véhicules</li>
+                        <li class="mb-3"><a href="/controllers/dashboard/vehicles/create-ctrl.php"><i class="bi bi-plus-circle icons"></i>
                                 <div class="vr mx-2"></div><span class="menu-text">
                                     Ajouter un véhicule</span>
                             </a></li>
-                        <li class="mb-5"><a href=""><i class="bi bi-car-front-fill icons"></i>
+                        <li class="mb-5"><a href="/controllers/dashboard/vehicles/list-ctrl.php"><i class="bi bi-car-front-fill icons"></i>
                                 <div class="vr mx-2"></div><span class="menu-text">
                                     Liste des véhicules</span>
                             </a></li>
