@@ -19,8 +19,11 @@ try {
         $order = 'ASC';
     }
     $vehicles = Vehicle::get_all($column, $order);
+    $archivedVehicles = Vehicle::get_archived($column, $order);
 
     $delete = filter_input(INPUT_GET, 'delete', FILTER_SANITIZE_NUMBER_INT);
+    $archive = filter_input(INPUT_GET, 'archive', FILTER_SANITIZE_NUMBER_INT);
+    $restore = filter_input(INPUT_GET, 'restore', FILTER_SANITIZE_NUMBER_INT);
 } catch (\Throwable $th) {
     $errors = $th->getMessage();
     include __DIR__ . '/../../../views/dashboard/templates/header-dashboard.php';

@@ -71,10 +71,10 @@
                 </div>
             </div>
 
-            <!-- <div class="mb-3">
+            <div class="mb-3">
                 <label for="picture" class="form-label">Photo du véhicule</label>
                 <input name="picture" class="form-control" type="file" id="picture" accept=".png, image/jpeg">
-            </div> -->
+            </div>
 
 
 

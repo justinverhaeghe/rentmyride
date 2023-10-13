@@ -68,25 +68,26 @@ try {
             }
         }
 
-        // try {
-        //     $picture = isset($_FILES['picture']);
-        //     if ($picture['error'] != 0) {
-        //         throw new Exception("Fichier non envoyé", 1);
-        //     }
-        //     if (!in_array($picture['type'], VALID_EXTENSIONS)) {
-        //         throw new Exception("Mauvaise extension de fichier", 2);
-        //     }
-        //     if ($picture['size'] >= FILE_SIZE) {
-        //         throw new Exception("Taille du fichier dépassé", 3);
-        //     }
-        //     $extension = pathinfo($picture['name'], PATHINFO_EXTENSION);
-        //     $newNameFile = uniqid('pp_') . '.' . $extension;
-        //     $from = $picture['tmp_name'];
-        //     $to = '/public/uploads/user/' . $newNameFile;
-        //     move_uploaded_file($from, $to);
-        // } catch (\Throwable $th) {
-        //     $errors['picture'] = $th->getMessage();
-        // }
+
+        try {
+            $picture = $_FILES['picture'];
+            if ($picture['error'] != 0) {
+                throw new Exception("Fichier non envoyé", 1);
+            }
+            if (!in_array($picture['type'], VALID_EXTENSIONS)) {
+                throw new Exception("Mauvaise extension de fichier", 2);
+            }
+            if ($picture['size'] >= FILE_SIZE) {
+                throw new Exception("Taille du fichier dépassé", 3);
+            }
+            $extension = pathinfo($picture['name'], PATHINFO_EXTENSION);
+            $newNameFile = uniqid('img_') . '.' . $extension;
+            $from = $picture['tmp_name'];
+            $to = __DIR__ . '/../../../public/uploads/vehicles/' . $newNameFile;
+            move_uploaded_file($from, $to);
+        } catch (\Throwable $th) {
+            $errors['picture'] = $th->getMessage();
+        }
 
         if (empty($errors)) {
             $vehicleObj = new Vehicle();
@@ -95,6 +96,7 @@ try {
             $vehicleObj->set_model($model);
             $vehicleObj->set_registration($registration);
             $vehicleObj->set_mileage($mileage);
+            $vehicleObj->set_picture($newNameFile);
             $isSaved = $vehicleObj->insert();
         }
     };

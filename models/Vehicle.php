@@ -8,7 +8,7 @@ class Vehicle
     private string $model;
     private string $registration;
     private int $mileage;
-    private ?int $picture;
+    private ?string $picture;
     private DateTime $created_at;
     private DateTime $updated_at;
     private ?DateTime $deleted_at;
@@ -125,12 +125,13 @@ class Vehicle
     public function insert(): bool
     {
         $pdo = connect();
-        $sql = 'INSERT INTO `vehicles`(`id_types`, `brand`, `model`, `registration`, `mileage`) VALUES (:id_type, :brand, :model, :registration, :mileage);';
+        $sql = 'INSERT INTO `vehicles`(`id_types`, `brand`, `model`, `registration`,`picture`, `mileage`) VALUES (:id_type, :brand, :model, :registration, :picture, :mileage);';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_type', $this->get_id_types(), PDO::PARAM_INT);
         $sth->bindValue(':brand', $this->get_brand(), PDO::PARAM_STR);
         $sth->bindValue(':model', $this->get_model(), PDO::PARAM_STR);
         $sth->bindValue(':registration', $this->get_registration(), PDO::PARAM_STR);
+        $sth->bindValue(':picture', $this->get_picture(), PDO::PARAM_STR);
         $sth->bindValue(':mileage', $this->get_mileage(), PDO::PARAM_INT);
         $result = $sth->execute();
         return $result;
@@ -142,6 +143,7 @@ class Vehicle
         $sql = "SELECT `vehicles`.*, `types`.`type` 
         FROM `vehicles` 
         INNER JOIN `types` ON `vehicles`.`Id_types` = `types`.`Id_types`
+        WHERE `deleted_at` IS NULL
         ORDER BY `$column` $order ;";
         $sth = $pdo->prepare($sql);
         $sth->execute();
@@ -155,6 +157,7 @@ class Vehicle
         $sql = "SELECT `vehicles`.*, `types`.`type` 
         FROM `vehicles` 
         INNER JOIN `types` ON `vehicles`.`Id_types` = `types`.`Id_types`
+        WHERE `deleted_at` IS NULL
         LIMIT 10;";
         $sth = $pdo->query($sql);
         $datas = $sth->fetchAll();
@@ -177,7 +180,7 @@ class Vehicle
     {
         $pdo = connect();
         $sql = "UPDATE `vehicles` 
-        SET `brand` = :brand, `model` = :model, `registration` = :registration, `mileage` =:mileage, `id_types` =:id_types 
+        SET `brand` = :brand, `model` = :model, `registration` = :registration, `mileage` =:mileage,`picture` =:picture `id_types` =:id_types 
         WHERE `id_vehicles` = :id_vehicles;";
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':brand', $this->get_brand(), PDO::PARAM_STR);
@@ -185,6 +188,7 @@ class Vehicle
         $sth->bindValue(':registration', $this->get_registration(), PDO::PARAM_STR);
         $sth->bindValue(':mileage', $this->get_mileage(), PDO::PARAM_INT);
         $sth->bindValue(':id_types', $this->get_id_types(), PDO::PARAM_INT);
+        $sth->bindValue(':picture', $this->get_picture(), PDO::PARAM_STR);
         $sth->bindValue(':id_vehicles', $this->get_id_vehicles(), PDO::PARAM_INT);
         $result = $sth->execute();
         return $result;
@@ -194,9 +198,49 @@ class Vehicle
     {
         $pdo = connect();
         $sql = "DELETE FROM `vehicles` WHERE `id_vehicles` = :id_vehicles;";
+        $thisVehicle = Vehicle::get($id_vehicles);
+        @unlink(__DIR__ . '/../public/uploads/vehicles/' . $thisVehicle->picture);
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_vehicles', $id_vehicles, PDO::PARAM_INT);
         $sth->execute();
         return (bool) $sth->rowCount();
+    }
+
+    public static function archive($id_vehicles)
+    {
+        $pdo = connect();
+        $sql = 'UPDATE `vehicles`
+                SET `deleted_at`= NOW()
+                WHERE `id_vehicles`=:id_vehicles ;';
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_vehicles', $id_vehicles);
+        $result = $sth->execute();
+
+        return $result;
+    }
+
+    public static function get_archived(string $column, string $order): array
+    {
+        $pdo = connect();
+        $sql = "SELECT `vehicles`.*, `types`.`type` 
+        FROM `vehicles` 
+        INNER JOIN `types` ON `vehicles`.`Id_types` = `types`.`Id_types`
+        WHERE `deleted_at` IS NOT NULL
+        ORDER BY `$column` $order ;";
+        $sth = $pdo->prepare($sql);
+        $sth->execute();
+        $datas = $sth->fetchAll();
+        return $datas;
+    }
+
+    public static function restore($id_vehicles)
+    {
+        $pdo = connect();
+        $sql = 'UPDATE `vehicles`
+                SET `deleted_at` = NULL
+                WHERE `id_vehicles`=:id_vehicles ;';
+        $sth = $pdo->prepare($sql);
+        $sth->bindValue(':id_vehicles', $id_vehicles);
+        $sth->execute();
     }
 }

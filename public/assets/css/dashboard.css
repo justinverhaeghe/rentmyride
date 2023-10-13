@@ -38,24 +38,25 @@ li {
     color: white;
 }
 
-.bi-pencil-square {
-    color: #343434;
-}
-.bi-pencil-square:hover {
-    color: #a8a8a5;
-}
-
-.bi-x-circle {
+.bi-pencil-square,
+.bi-archive-fill,
+.bi-x-circle,
+.bi-image {
     color: #343434 !important;
 }
-
-.bi-x-circle:hover {
-    color: #a8a8a5;
+.bi-pencil-square:hover,
+.bi-archive-fill:hover,
+.bi-x-circle:hover,
+.bi-image:hover {
+    color: #a8a8a5 !important;
 }
 
 th a {
     text-decoration: none;
     color: white;
+}
+th:hover {
+    background-color: #a8a8a5 !important;
 }
 
 @media screen and (max-width: 575px) {
