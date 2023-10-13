@@ -53,6 +53,11 @@ li {
     color: #a8a8a5;
 }
 
+th a {
+    text-decoration: none;
+    color: white;
+}
+
 @media screen and (max-width: 575px) {
     #sidebar {
         min-height: 30vh;

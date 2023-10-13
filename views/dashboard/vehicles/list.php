@@ -5,12 +5,23 @@
         <table class="table rounded table-hover mb-3">
             <thead>
                 <tr>
-                    <th class="bg-grey text-light col">#</th>
-                    <th class="col text-light bg-grey">Catégorie</th>
-                    <th class="col text-light bg-grey">Marque</th>
-                    <th class="col text-light bg-grey">Modèle</th>
-                    <th class="col text-light bg-grey">Immat.</th>
-                    <th class="col text-light bg-grey">Km</th>
+                    <th class="col text-light bg-grey"><a
+                            href="?column=type&order=<?= $order == 'ASC' ? 'DESC' : 'ASC' ?>">Catégorie <i
+                                class="bi bi-arrow-down-up"></i></a></th>
+
+                    <th class="col text-light bg-grey"><a
+                            href="?column=brand&order=<?= $order == 'ASC' ? 'DESC' : 'ASC' ?>">Marque
+                            <i class="bi bi-arrow-down-up"></i></a></th>
+
+                    <th class="col text-light bg-grey"><a
+                            href="?column=model&order=<?= $order == 'ASC' ? 'DESC' : 'ASC' ?>">Modèle <i
+                                class="bi bi-arrow-down-up"></i></a></th>
+                    <th class="col text-light bg-grey"><a
+                            href="?column=registration&order=<?= $order == 'ASC' ? 'DESC' : 'ASC' ?>">Immat. <i
+                                class="bi bi-arrow-down-up"></i></th>
+                    <th class="col text-light bg-grey"><a
+                            href="?column=mileage&order=<?= $order == 'ASC' ? 'DESC' : 'ASC' ?>">Km <i
+                                class="bi bi-arrow-down-up"></i></a></th>
                     <th class="col text-light bg-grey">Modifier</th>
                     <th class="col text-light bg-grey">Supprimer</th>
                 </tr>
@@ -19,16 +30,17 @@
                 <?php
                 foreach ($vehicles as $vehicle) { ?>
                 <tr>
-                    <td><?= $vehicle->id_vehicles ?></td>
                     <td><?= $vehicle->type ?></td>
                     <td><?= $vehicle->brand ?></td>
                     <td><?= $vehicle->model ?></td>
                     <td><?= $vehicle->registration ?></td>
                     <td><?= $vehicle->mileage ?></td>
-                    <td><a href="/controllers/dashboard/types/update-ctrl.php?id_types=<?= $vehicle->id_vehicles ?>"><i
+                    <td><a
+                            href="/controllers/dashboard/vehicles/update-ctrl.php?id_vehicles=<?= $vehicle->id_vehicles ?>"><i
                                 class="bi bi-pencil-square"></i></a>
                     </td>
-                    <td><a href="/controllers/dashboard/types/delete-ctrl.php?id_types=<?= $vehicle->id_vehicles ?>"><i
+                    <td><a
+                            href="/controllers/dashboard/vehicles/delete-ctrl.php?id_vehicles=<?= $vehicle->id_vehicles ?>"><i
                                 class="bi bi-x-circle"></i></a></td>
 
                 </tr>
