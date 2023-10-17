@@ -48,7 +48,7 @@ try {
             }
         }
 
-        // Validation du modèle
+        // Validation de l'immatriculation
         $registration = filter_input(INPUT_POST, 'registration', FILTER_SANITIZE_SPECIAL_CHARS);
         if (empty($registration)) {
             $errors['registration'] = 'Veuillez obligatoirement entrer une immatriculation';
@@ -101,7 +101,7 @@ try {
         }
     };
 } catch (\Throwable $th) {
-    $errors = $th->getMessage();
+    $error = $th->getMessage();
     include __DIR__ . '/../../../views/dashboard/templates/header-dashboard.php';
     include __DIR__ . '/../../../views/dashboard/templates/navbar-dashboard.php';
     include __DIR__ . '/../../../views/pages/error.php';

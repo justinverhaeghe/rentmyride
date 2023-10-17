@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/../../../config/constants.php';
 require_once __DIR__ . '/../../../config/database.php';
 require_once __DIR__ . '/../../../models/Vehicle.php';
@@ -68,6 +67,65 @@ try {
             }
         }
 
+        $newNameFile = $stdVehicle->picture;
+        $deleteImg = filter_input(INPUT_POST, 'deleteImg');
+        if ($deleteImg) {
+            @unlink(__DIR__ . '/../../../public/uploads/vehicles/' . $stdVehicle->picture);
+            $newNameFile = NULL;
+        }
+        if (!empty($picture = $_FILES['picture'])) {
+            if (!empty($_FILES['picture']['name'])) {
+                try {
+                    // @unlink(__DIR__ . '/../../../public/uploads/vehicles/' . $stdVehicle->picture);
+                    $picture = $_FILES['picture'];
+                    if ($picture['error'] != 0) {
+                        throw new Exception("Erreur lors du transfert", 1);
+                    }
+                    if (!in_array($picture['type'], VALID_EXTENSIONS)) {
+                        throw new Exception("Mauvaise extension de fichier", 2);
+                    }
+                    if ($picture['size'] >= FILE_SIZE) {
+                        throw new Exception("Taille du fichier dépassé", 3);
+                    }
+                    $extension = pathinfo($picture['name'], PATHINFO_EXTENSION);
+                    $newNameFile = uniqid('img_') . '.' . $extension;
+                    $from = $picture['tmp_name'];
+                    $to = __DIR__ . '/../../../public/uploads/vehicles/' . $newNameFile;
+                    move_uploaded_file($from, $to);
+                } catch (\Throwable $th) {
+                    var_dump($th);
+                    $errors['picture'] = $th->getMessage();
+                }
+            }
+        } else {
+            if (!empty($_FILES['picture']['name'])) {
+                try {
+                    $picture = $_FILES['picture'];
+                    if ($picture['error'] != 0) {
+                        throw new Exception("Erreur lors du transfert", 1);
+                    }
+                    if (!in_array($picture['type'], VALID_EXTENSIONS)) {
+                        throw new Exception("Mauvaise extension de fichier", 2);
+                    }
+                    if ($picture['size'] >= FILE_SIZE) {
+                        throw new Exception("Taille du fichier dépassé", 3);
+                    }
+                    $extension = pathinfo($picture['name'], PATHINFO_EXTENSION);
+                    $newNameFile = uniqid('img_') . '.' . $extension;
+                    $from = $picture['tmp_name'];
+                    $to = __DIR__ . '/../../../public/uploads/vehicles/' . $newNameFile;
+                    move_uploaded_file($from, $to);
+                    @unlink(__DIR__ . '/../../../public/uploads/vehicles/' . $stdVehicle->picture);
+                } catch (\Throwable $th) {
+                    var_dump($th);
+                    $errors['picture'] = $th->getMessage();
+                }
+            }
+        }
+
+
+
+
         if (empty($errors)) {
             $vehicleObj = new Vehicle();
             $vehicleObj->set_id_vehicles($id_vehicles);
@@ -76,6 +134,7 @@ try {
             $vehicleObj->set_model($model);
             $vehicleObj->set_registration($registration);
             $vehicleObj->set_mileage($mileage);
+            $vehicleObj->set_picture($newNameFile);
             $isSaved = $vehicleObj->update();
             if ($isSaved) {
                 header('location: /controllers/dashboard/vehicles/list-ctrl.php');
@@ -86,7 +145,7 @@ try {
         }
     };
 } catch (\Throwable $th) {
-    $errors = $th->getMessage();
+    $error = $th->getMessage();
     include __DIR__ . '/../../../views/dashboard/templates/header-dashboard.php';
     include __DIR__ . '/../../../views/dashboard/templates/navbar-dashboard.php';
     include __DIR__ . '/../../../views/pages/error.php';

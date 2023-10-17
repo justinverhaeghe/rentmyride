@@ -125,7 +125,8 @@ class Vehicle
     public function insert(): bool
     {
         $pdo = connect();
-        $sql = 'INSERT INTO `vehicles`(`id_types`, `brand`, `model`, `registration`,`picture`, `mileage`) VALUES (:id_type, :brand, :model, :registration, :picture, :mileage);';
+        $sql = 'INSERT INTO `vehicles`(`id_types`, `brand`, `model`, `registration`,`picture`, `mileage`) 
+                VALUES (:id_type, :brand, :model, :registration, :picture, :mileage);';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_type', $this->get_id_types(), PDO::PARAM_INT);
         $sth->bindValue(':brand', $this->get_brand(), PDO::PARAM_STR);
@@ -180,7 +181,7 @@ class Vehicle
     {
         $pdo = connect();
         $sql = "UPDATE `vehicles` 
-        SET `brand` = :brand, `model` = :model, `registration` = :registration, `mileage` =:mileage,`picture` =:picture `id_types` =:id_types 
+        SET `brand` = :brand, `model` = :model, `registration` = :registration, `mileage` =:mileage,`picture` =:picture,  `id_types` =:id_types 
         WHERE `id_vehicles` = :id_vehicles;";
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':brand', $this->get_brand(), PDO::PARAM_STR);
@@ -198,11 +199,11 @@ class Vehicle
     {
         $pdo = connect();
         $sql = "DELETE FROM `vehicles` WHERE `id_vehicles` = :id_vehicles;";
-        $thisVehicle = Vehicle::get($id_vehicles);
-        @unlink(__DIR__ . '/../public/uploads/vehicles/' . $thisVehicle->picture);
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_vehicles', $id_vehicles, PDO::PARAM_INT);
         $sth->execute();
+        $thisVehicle = self::get($id_vehicles);
+        @unlink(__DIR__ . '/../public/uploads/vehicles/' . $thisVehicle->picture);
         return (bool) $sth->rowCount();
     }
 
@@ -214,9 +215,9 @@ class Vehicle
                 WHERE `id_vehicles`=:id_vehicles ;';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_vehicles', $id_vehicles);
-        $result = $sth->execute();
+        $sth->execute();
 
-        return $result;
+        return (bool) $sth->rowCount();
     }
 
     public static function get_archived(string $column, string $order): array
@@ -242,5 +243,6 @@ class Vehicle
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_vehicles', $id_vehicles);
         $sth->execute();
+        return (bool) $sth->rowCount();
     }
 }

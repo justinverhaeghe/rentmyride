@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <!-- Select Year -->
+                    <!-- Select km -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="mileage" name="mileage" placeholder="ex: AB-123-AB"
                             pattern="<?= REGEX_MILEAGE ?>" value="<?= $stdVehicle->mileage ?>" required>
@@ -72,10 +72,30 @@
                 </div>
             </div>
 
-            <!-- <div class="mb-3">
+            <?php if (isset($stdVehicle->picture)) { ?>
+            <div class="d-flex justify-content-center ">
+                <div class="card w-25 mb-3">
+                    <img src="/public/uploads/vehicles/<?= $stdVehicle->picture ?>" alt="img du véhicule"
+                        class="img-fluid rounded-top ">
+                    <div class="card-body">
+                        <p class="card-text form-check">
+                            <input class="form-check-input" name="deleteImg" type="checkbox" value="true"
+                                id="deleteImg">
+                            <label class="form-check-label" for="deleteImg">
+                                Supprimer l'image ?
+                            </label>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <?php } ?>
+
+            <div class="mb-3 d-none" id="pictureFile">
                 <label for="picture" class="form-label">Photo du véhicule</label>
-                <input name="picture" class="form-control" type="file" id="picture" accept=".png, image/jpeg">
-            </div> -->
+                <input name="picture" class="form-control" type="file" id="picture" value="<?= $stdVehicle->picture ?>"
+                    accept=".png, image/jpeg">
+            </div>
 
 
 

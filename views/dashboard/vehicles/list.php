@@ -42,12 +42,26 @@
                     <td><?= $vehicle->model ?></td>
                     <td><?= $vehicle->registration ?></td>
                     <td><?= $vehicle->mileage ?></td>
-                    <?php if (isset($vehicle->picture)) { ?>
-                    <td><a href="/public/uploads/vehicles/<?= $vehicle->picture ?>" target="_blank"><i
-                                class="bi bi-image"></i></a></td>
-                    <?php } else { ?>
-                    <td></td>
-                    <?php } ?>
+                    <td><?php if (isset($vehicle->picture)) { ?>
+                        <a data-bs-toggle="modal" data-bs-target="#<?= $vehicle->id_vehicles ?>"><i
+                                class="bi bi-image"></i></a>
+                        <div class="modal fade" id="<?= $vehicle->id_vehicles ?>" tabindex="-1"
+                            aria-labelledby="picture" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <img src="/public/uploads/vehicles/<?= $vehicle->picture ?>"
+                                            alt="photo du véhicule" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </td>
                     <td><a
                             href="/controllers/dashboard/vehicles/update-ctrl.php?id_vehicles=<?= $vehicle->id_vehicles ?>"><i
                                 class="bi bi-pencil-square"></i></a>
@@ -55,7 +69,6 @@
                     <td><a
                             href="/controllers/dashboard/vehicles/archive-ctrl.php?id_vehicles=<?= $vehicle->id_vehicles ?>"><i
                                 class="bi bi-archive-fill"></i></a></td>
-
                 </tr>
                 <?php } ?>
             </tbody>
@@ -124,9 +137,9 @@
             </tbody>
         </table>
         <?php if (isset($restore) && $restore === '1') { ?>
-        <p class="text-success">L'enregistrement à bien été supprimé</p>
+        <p class="text-success">L'enregistrement à bien été restauré</p>
         <?php } elseif (isset($restore) && $restore === '0') { ?>
-        <p class="text-danger">L'enregistrement n'a pas été supprimé</p>
+        <p class="text-danger">L'enregistrement n'a pas été restauré</p>
         <?php } elseif (isset($delete) && $delete === '1') { ?>
         <p class="text-success">L'enregistrement à bien été supprimé</p>
         <?php } elseif (isset($delete) && $delete === '0') { ?>

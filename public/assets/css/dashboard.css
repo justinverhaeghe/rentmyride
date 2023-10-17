@@ -53,10 +53,16 @@ li {
 
 th a {
     text-decoration: none;
+    cursor: pointer;
     color: white;
 }
 th:hover {
     background-color: #a8a8a5 !important;
+}
+
+.form-check-input:checked {
+    background-color: #343434;
+    border-color: #343434;
 }
 
 @media screen and (max-width: 575px) {

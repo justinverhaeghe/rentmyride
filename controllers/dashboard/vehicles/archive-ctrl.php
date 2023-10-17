@@ -11,7 +11,7 @@ try {
     $page = 'Suppresion du véhicule';
     $id_vehicles = intval(filter_input(INPUT_GET, 'id_vehicles', FILTER_SANITIZE_NUMBER_INT));
     $archiveObj = (int) Vehicle::archive($id_vehicles);
-    header('location: /controllers/dashboard/vehicles/list-ctrl.php?delete=' . $archiveObj);
+    header('location: /controllers/dashboard/vehicles/list-ctrl.php?archive=' . $archiveObj);
 } catch (\Throwable $th) {
     $error = $th->getMessage();
     include __DIR__ . '/../../../views/dashboard/templates/header-dashboard.php';

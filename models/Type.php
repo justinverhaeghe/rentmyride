@@ -66,7 +66,7 @@ class Type
     public static function get_all(): array
     {
         $pdo = connect();
-        $sql = "SELECT * FROM `types`;";
+        $sql = "SELECT * FROM `types` ORDER BY `type` ASC;";
         $sth = $pdo->query($sql);
         $datas = $sth->fetchAll();
 
