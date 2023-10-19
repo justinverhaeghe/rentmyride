@@ -138,7 +138,7 @@ class Vehicle
         return $result;
     }
 
-    public static function get_all(string $column, string $order): array
+    public static function get_all(string $column = 'type', string $order = 'ASC'): array
     {
         $pdo = connect();
         $sql = "SELECT `vehicles`.*, `types`.`type` 
@@ -165,16 +165,19 @@ class Vehicle
         return $datas;
     }
 
-    public static function get(int $id_vehicles): object
+    public static function get(int $id_vehicles)
     {
         $pdo = connect();
-        $sql = "SELECT * FROM `vehicles` WHERE `id_vehicles` = :id_vehicles;";
+        $sql = "SELECT * 
+        FROM `vehicles` 
+        INNER JOIN `types` ON `vehicles`.`Id_types` = `types`.`Id_types`
+        WHERE `id_vehicles` = :id_vehicles ;";
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_vehicles', $id_vehicles, PDO::PARAM_INT);
         $sth->execute();
-        $result = $sth->fetch();
+        $results = $sth->fetch();
 
-        return $result;
+        return $results;
     }
 
     public function update(): bool
@@ -202,8 +205,7 @@ class Vehicle
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_vehicles', $id_vehicles, PDO::PARAM_INT);
         $sth->execute();
-        $thisVehicle = self::get($id_vehicles);
-        @unlink(__DIR__ . '/../public/uploads/vehicles/' . $thisVehicle->picture);
+
         return (bool) $sth->rowCount();
     }
 

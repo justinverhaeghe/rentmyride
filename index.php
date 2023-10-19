@@ -1,3 +1,4 @@
 <?php
 
-header('location: /controllers/dashboard/dashboard-ctrl.php');
+header('location: /controllers/public/home-ctrl.php');
+die;

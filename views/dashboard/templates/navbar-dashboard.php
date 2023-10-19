@@ -27,7 +27,7 @@
                                 <div class="vr mx-2"></div><span class="menu-text">
                                     Liste des véhicules</span>
                             </a></li>
-                        <li class="mb-3"><a href="/index.php"><i class="bi bi-arrow-return-left icons"></i>
+                        <li class="mb-3"><a href="/controllers/public/home-ctrl.php"><i class="bi bi-arrow-return-left icons"></i>
                                 <div class="vr mx-2"></div><span class="menu-text"> Retour au site</span>
                             </a></li>
                     </ul>

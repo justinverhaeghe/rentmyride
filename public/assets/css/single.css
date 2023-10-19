@@ -1,0 +1,13 @@
+ul li {
+    list-style: none;
+    font-size: 32px;
+}
+
+h1 {
+    font-family: "Titan One", sans-serif;
+    text-decoration: underline;
+}
+
+.border-primary {
+    border-color: #343434 !important;
+}

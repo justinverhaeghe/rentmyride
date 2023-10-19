@@ -10,7 +10,11 @@ try {
     $style = 'dashboard';
     $page = 'Suppresion du véhicule';
     $id_vehicles = intval(filter_input(INPUT_GET, 'id_vehicles', FILTER_SANITIZE_NUMBER_INT));
+    $thisVehicle = Vehicle::get($id_vehicles);
     $archiveObj = (int) Vehicle::delete($id_vehicles);
+    if ($archiveObj) {
+        @unlink(__DIR__ . '/../public/uploads/vehicles/' . $thisVehicle->picture);
+    }
     header('location: /controllers/dashboard/vehicles/list-ctrl.php?delete=' . $archiveObj);
 } catch (\Throwable $th) {
     $error = $th->getMessage();

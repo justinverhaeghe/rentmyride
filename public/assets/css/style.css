@@ -1,4 +1,133 @@
+/* font-family: 'Alatsi', sans-serif;
+font-family: 'Pacifico', cursive;
+font-family: 'Roboto', sans-serif;
+font-family: 'Titan One', sans-serif; */
+
 body {
     height: 100vh;
-    font-family: "Space Grotesk", sans-serif;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Alatsi", sans-serif;
+}
+
+header {
+    min-height: 10vh;
+    font-family: "Alatsi", sans-serif;
+    color: white;
+}
+
+#mainlogo {
+    height: 125px;
+}
+
+.menu li {
+    display: inline;
+}
+li a {
+    text-decoration: none;
+    color: white;
+}
+li a:hover {
+    color: #a8a8a5;
+}
+
+#navbar {
+    background-color: #343434;
+}
+
+#slogan {
+    min-height: 60vh;
+    background-image: url(/public/assets/img/honda.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+}
+
+.easy {
+    color: #0e34a0;
+    font-size: 60px;
+    font-family: Pacifico;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.rentmyride {
+    color: #0e34a0;
+    font-size: 52px;
+    font-family: Titan One;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.title {
+    color: black;
+    font-size: 48px;
+    font-family: Titan One;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.subtext {
+    color: rgba(95, 89, 128, 0.5);
+    font-size: 24px;
+    font-family: Alatsi;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+h2 {
+    color: #343434;
+    font-size: 60px;
+    font-family: Titan One;
+    font-weight: 400;
+    text-transform: uppercase;
+    word-wrap: break-word;
+}
+
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #0e34a0;
+    --bs-btn-border-color: #0e34a0;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #0b5ed7;
+    --bs-btn-hover-border-color: #0e34a0;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #0e34a0;
+    --bs-btn-active-border-color: #0e34a0;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #0e34a0;
+    --bs-btn-disabled-border-color: #0e34a0;
+}
+
+#whoarewe {
+    font-size: 30px;
+    color: rgba(95, 89, 128, 0.5);
+    font-family: Alatsi;
+    line-height: 2em;
+}
+
+#dodge {
+    min-height: 55vh;
+    background-image: url(/public/assets/img/dodge.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+}
+
+footer {
+    min-height: 20vh;
+    background-color: #343434;
+}
+
+.logoSize {
+    min-height: 20vh;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
 }
