@@ -25,11 +25,7 @@
                 <input class="form-control me-2" type="search" name="search" id="search" placeholder="ex : bugatti" value="<?= $search ?>">
             </div>
             </form>
-
             <form class="row row-cols-lg-auto g-3 align-items-center mb-3 ps-5">
-
-
-
 
         </div>
         <div class="row justify-content-around">
@@ -73,7 +69,7 @@
                 <ul class="pagination">
                     <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
                     <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
-                        <a href="?page=<?= $currentPage - 1 ?>&id_types=<?= $id_types ?>&search=<?= $search ?>" class="page-link">Précédente</a>
+                        <a href="?page=<?= $currentPage - 1 ?>&id_types=<?= $id_types ?>&search=<?= $search ?>" class="page-link">&laquo;</a>
                     </li>
                     <?php for ($page = 1; $page <= $pages; $page++) : ?>
                         <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
@@ -83,7 +79,7 @@
                     <?php endfor ?>
                     <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
                     <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
-                        <a href="?page=<?= $currentPage + 1 ?>&id_types=<?= $id_types ?>&search=<?= $search ?>" class="page-link">Suivante</a>
+                        <a href="?page=<?= $currentPage + 1 ?>&id_types=<?= $id_types ?>&search=<?= $search ?>" class="page-link">&raquo;</a>
                     </li>
                 </ul>
             </nav>

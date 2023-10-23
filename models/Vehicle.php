@@ -138,7 +138,7 @@ class Vehicle
         return $result;
     }
 
-    public static function get_all(string $column = 'type', string $order = 'ASC', int $id_types = NULL, string $search = '', int $page = NULL, int $parPage = 10): array
+    public static function get_all(string $column = 'type', string $order = 'ASC', int $id_types = NULL, string $search = '', int $page = null, int $parPage = 10): array
     {
 
         $pdo = connect();

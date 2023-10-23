@@ -15,7 +15,7 @@
                     <li>Immatriculation : <?= $vehicle->registration ?></li>
                     <li>Kilométrage : <?= $vehicle->mileage ?> kms</li>
                     <li>Disponible depuis le : <?= $dateFormated ?></li>
-                    <a href="/controllers/public/single-ctrl.php?id=<?= $vehicle->id_vehicles ?>"
+                    <a href="/controllers/public/rent-ctrl.php?id=<?= $vehicle->id_vehicles ?>"
                         class="btn btn-primary my-2">Louer le véhicule</a>
                 </ul>
             </div>
