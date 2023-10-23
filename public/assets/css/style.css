@@ -131,3 +131,11 @@ footer {
     height: 40vh;
     object-fit: cover;
 }
+
+.active > .page-link,
+.page-link.active {
+    z-index: 3;
+    color: var(--bs-pagination-active-color);
+    background-color: #0e34a0;
+    border-color: #0e34a0;
+}

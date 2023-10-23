@@ -5,18 +5,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="Dashboard" />
-    <meta name="description" content="Dashboard - Rent My Ride" />
+    <meta name="description" content="<?= $description ?>" />
     <meta name="author" content="Justin Verhaeghe" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Alatsi&family=Pacifico&family=Roboto&family=Titan+One&display=swap"
-        rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Pacifico&family=Roboto&family=Titan+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/public/assets/css/style.css" />
     <link rel="stylesheet" href="/public/assets/css/<?= $style ?>.css" />
+    <?php
+    if (isset($script)) { ?>
+        <script defer src="/public/assets/js/<?= $script ?>.js"></script>
+    <?php } ?>
+
     <title><?= $title ?></title>
 </head>
 
@@ -27,8 +29,7 @@
             <div class="row">
                 <div class="col-12 col-sm-4">
                     <a href="/index.php">
-                        <img src="/public/assets/img/logo.png" alt="logo rent my ride black and white" class="img-fluid"
-                            id="mainlogo">
+                        <img src="/public/assets/img/logo.png" alt="logo rent my ride black and white" class="img-fluid" id="mainlogo">
                     </a>
                 </div>
                 <div class="col-12 col-sm-8 d-flex justify-content-end align-items-center">

@@ -138,14 +138,32 @@ class Vehicle
         return $result;
     }
 
-    public static function get_all(string $column = 'type', string $order = 'ASC'): array
+    public static function get_all(string $column = 'type', string $order = 'ASC', int $id_types = NULL, string $search = '', int $page = NULL, int $parPage = 10): array
     {
+
         $pdo = connect();
+        if ($id_types) {
+            $id_types = "AND `types`.`id_types` = $id_types";
+        } else {
+            $id_types = '';
+        }
+        if (!empty($search)) {
+            $search = "AND `brand` LIKE '%$search%' OR `model` LIKE '%$search%'";
+        } else {
+            $search = '';
+        }
+        if ($page && $parPage) {
+            $start = ($page * $parPage) - $parPage;
+            $limit = "LIMIT $start, $parPage";
+        } else {
+            $limit = '';
+        }
+
         $sql = "SELECT `vehicles`.*, `types`.`type` 
         FROM `vehicles` 
         INNER JOIN `types` ON `vehicles`.`Id_types` = `types`.`Id_types`
-        WHERE `deleted_at` IS NULL
-        ORDER BY `$column` $order ;";
+        WHERE `deleted_at` IS NULL $id_types $search
+        ORDER BY $column $order $limit ;";
         $sth = $pdo->prepare($sql);
         $sth->execute();
         $datas = $sth->fetchAll();
@@ -246,5 +264,25 @@ class Vehicle
         $sth->bindValue(':id_vehicles', $id_vehicles);
         $sth->execute();
         return (bool) $sth->rowCount();
+    }
+
+    public static function countVehicle(int $id_types = NULL, string $search = NULL)
+    {
+        $pdo = connect();
+        if ($id_types) {
+            $id_types = "AND `vehicles`.`id_types` = $id_types";
+        } else {
+            $id_types = '';
+        }
+        if ($search) {
+            $search = "AND `brand` LIKE '%$search%' OR `model` LIKE '%$search%'";
+        } else {
+            $search = '';
+        }
+        $sql = "SELECT COUNT(*) AS `nb_vehicles` FROM `vehicles` WHERE `deleted_at` IS NULL $id_types $search;";
+        $sth = $pdo->prepare($sql);
+        $sth->execute();
+        $result = $sth->fetch();
+        return (int) $result->nb_vehicles;
     }
 }

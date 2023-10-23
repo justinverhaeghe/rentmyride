@@ -3,8 +3,6 @@
     color: #dfdfdf;
     min-height: 100vh;
     box-shadow: 5px 0 5px -5px #333;
-    position: sticky;
-    top: 0;
 }
 
 #sidebar a,
