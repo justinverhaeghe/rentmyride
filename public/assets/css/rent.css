@@ -1,3 +1,10 @@
 .border-primary {
     border-color: #343434 !important;
 }
+ul li {
+    list-style: none;
+}
+
+ul {
+    padding-left: 0;
+}

@@ -21,5 +21,4 @@ define('VALID_EXTENSIONS', ['image/png', 'image/jpeg']);
 define('FILE_SIZE', 3 * 1000 * 1000);
 define('REGEX_NAME', "/^[a-zA-Z-' ]*$/");
 define('REGEX_CP', "/^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/");
-define('REGEX_DATE', "/^(0[1-9]|1[012])[-\/\.](0[1-9]|[12][0-9]|3[01])[-\/\.](19|20)\d\d$/");
 define('REGEX_PHONE', "/^[0-9]{0,10}$");
