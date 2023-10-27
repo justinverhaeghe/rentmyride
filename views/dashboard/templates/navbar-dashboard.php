@@ -9,6 +9,11 @@
                 </div>
                 <div class="col-12 ps-5">
                     <ul>
+                        <li class="fs-5">Réservations</li>
+                        <li class="mb-5"><a href="/controllers/dashboard/rents/list-ctrl.php"><i class="bi bi-journals icons"></i>
+                                <div class="vr mx-2"></div><span class="menu-text">
+                                    Liste des réservations</span>
+                            </a></li>
                         <li class="fs-5">Catégorie</li>
                         <li class="mb-3"><a href="/controllers/dashboard/types/create-ctrl.php"><i class="bi bi-folder-plus icons"></i>
                                 <div class="vr mx-2"></div><span class="menu-text">

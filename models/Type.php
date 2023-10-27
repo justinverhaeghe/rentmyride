@@ -51,7 +51,7 @@ class Type
      */
     public function insert(): bool
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = 'INSERT INTO `types`(`type`) VALUES (:type);';
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':type', $this->get_type(), PDO::PARAM_STR); //3eme parametre facultatif
@@ -65,7 +65,7 @@ class Type
      */
     public static function get_all(): array
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = "SELECT * FROM `types` ORDER BY `type` ASC;";
         $sth = $pdo->query($sql);
         $datas = $sth->fetchAll();
@@ -79,7 +79,7 @@ class Type
      */
     public static function get_first10(): array
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = "SELECT * FROM `types` LIMIT 10;";
         $sth = $pdo->query($sql);
         $datas = $sth->fetchAll();
@@ -94,7 +94,7 @@ class Type
      */
     public static function get(int $id_types): ?object
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = "SELECT * FROM `types` WHERE `id_types` = :id_types;";
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_types', $id_types, PDO::PARAM_INT);
@@ -110,7 +110,7 @@ class Type
      */
     public function update(): bool
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = "UPDATE `types` SET `type` = :type WHERE `id_types` = :id_types;";
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_types', $this->get_id_types(), PDO::PARAM_INT);
@@ -126,7 +126,7 @@ class Type
      */
     public static function delete(int $id_types): bool
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = "DELETE FROM `types` WHERE `id_types` = :id_types;";
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_types', $id_types, PDO::PARAM_INT);
@@ -141,7 +141,7 @@ class Type
      */
     public static function exists(string $type): bool
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = "SELECT COUNT(*) FROM `types` WHERE `type` = :type;";
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':type', $type, PDO::PARAM_STR);

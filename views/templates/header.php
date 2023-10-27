@@ -35,10 +35,9 @@
                 <div class="col-12 col-sm-8 d-flex justify-content-end align-items-center">
                     <ul class="menu">
                         <li><a href="/controllers/public/home-ctrl.php#vehicles">Nos Véhicules</a></li>
-                        <li class="vr mx-3"></li>
+                        <li class="vr mx-3 border-light"></li>
                         <li><a href="/controllers/public/home-ctrl.php#quisommesnous">Qui sommes nous ?</a></li>
-                        <li class="vr mx-3"></li>
-                        <li><a href="#">Réservation</a></li>
+
                     </ul>
                 </div>
             </div>

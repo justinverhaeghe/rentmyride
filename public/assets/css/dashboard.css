@@ -39,7 +39,8 @@ li {
 .bi-pencil-square,
 .bi-archive-fill,
 .bi-x-circle,
-.bi-image {
+.bi-image,
+.bi-clipboard2-check-fill {
     color: #343434 !important;
 }
 .bi-pencil-square:hover,
@@ -47,6 +48,9 @@ li {
 .bi-x-circle:hover,
 .bi-image:hover {
     color: #a8a8a5 !important;
+}
+a .bi-clipboard2-check-fill:hover {
+    color: green !important;
 }
 
 th a {

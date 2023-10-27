@@ -124,7 +124,7 @@ class Vehicle
 
     public function insert(): bool
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = 'INSERT INTO `vehicles`(`id_types`, `brand`, `model`, `registration`,`picture`, `mileage`) 
                 VALUES (:id_type, :brand, :model, :registration, :picture, :mileage);';
         $sth = $pdo->prepare($sql);
@@ -141,7 +141,7 @@ class Vehicle
     public static function get_all(string $column = 'type', string $order = 'ASC', int $id_types = NULL, string $search = '', int $page = null, int $parPage = 10): array
     {
 
-        $pdo = connect();
+        $pdo = Database::connect();
         if ($id_types) {
             $id_types = "AND `types`.`id_types` = $id_types";
         } else {
@@ -172,7 +172,7 @@ class Vehicle
 
     public static function get_first10(): array
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = "SELECT `vehicles`.*, `types`.`type` 
         FROM `vehicles` 
         INNER JOIN `types` ON `vehicles`.`Id_types` = `types`.`Id_types`
@@ -185,7 +185,7 @@ class Vehicle
 
     public static function get(int $id_vehicles)
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = "SELECT * 
         FROM `vehicles` 
         INNER JOIN `types` ON `vehicles`.`Id_types` = `types`.`Id_types`
@@ -200,7 +200,7 @@ class Vehicle
 
     public function update(): bool
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = "UPDATE `vehicles` 
         SET `brand` = :brand, `model` = :model, `registration` = :registration, `mileage` =:mileage,`picture` =:picture,  `id_types` =:id_types 
         WHERE `id_vehicles` = :id_vehicles;";
@@ -218,7 +218,7 @@ class Vehicle
 
     public static function delete(int $id_vehicles): bool
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = "DELETE FROM `vehicles` WHERE `id_vehicles` = :id_vehicles;";
         $sth = $pdo->prepare($sql);
         $sth->bindValue(':id_vehicles', $id_vehicles, PDO::PARAM_INT);
@@ -229,7 +229,7 @@ class Vehicle
 
     public static function archive($id_vehicles)
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = 'UPDATE `vehicles`
                 SET `deleted_at`= NOW()
                 WHERE `id_vehicles`=:id_vehicles ;';
@@ -242,7 +242,7 @@ class Vehicle
 
     public static function get_archived(string $column, string $order): array
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = "SELECT `vehicles`.*, `types`.`type` 
         FROM `vehicles` 
         INNER JOIN `types` ON `vehicles`.`Id_types` = `types`.`Id_types`
@@ -256,7 +256,7 @@ class Vehicle
 
     public static function restore($id_vehicles)
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         $sql = 'UPDATE `vehicles`
                 SET `deleted_at` = NULL
                 WHERE `id_vehicles`=:id_vehicles ;';
@@ -268,7 +268,7 @@ class Vehicle
 
     public static function countVehicle(int $id_types = NULL, string $search = NULL)
     {
-        $pdo = connect();
+        $pdo = Database::connect();
         if ($id_types) {
             $id_types = "AND `vehicles`.`id_types` = $id_types";
         } else {

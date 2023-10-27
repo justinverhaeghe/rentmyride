@@ -2,14 +2,22 @@
 
 require_once __DIR__ . '/../config/constants.php';
 
-
-function connect()
+class Database
 {
-    try {
-        $pdo = new PDO(DSN, USER, PWD);
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    } catch (PDOException $e) {
-        die("Erreur : " . $e->getMessage());
-    };
-    return $pdo;
+    private static $pdo;
+
+
+    public static function connect()
+    {
+        if (self::$pdo == null) {
+            try {
+                self::$pdo = new PDO(DSN, USER, PWD);
+                self::$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+            } catch (PDOException $e) {
+                die("Erreur : " . $e->getMessage());
+            };
+        }
+
+        return self::$pdo;
+    }
 }
